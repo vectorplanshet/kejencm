@@ -602,7 +602,7 @@ body {
     margin-bottom: 0;
     padding-top: 4px;         /* 3*1.333 */
 }
-    .dynamic-zoom {
+  .dynamic-zoom {
       position: absolute;
       bottom: 20px;
       left: 50%;
@@ -622,23 +622,24 @@ body {
     }
 
 .dynamic-zoom button {
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
   background: white;
   border: none;
   cursor: pointer;
-  font-size: 48px;
+  font-size: 20px; /* уменьшен размер шрифта */
   padding: 0;
   margin: 0;
-  line-height: 60px;
+  line-height: 30px;
   text-align: center;
   border-radius: 0;
   box-shadow: none;
 
-  color: black; /* цвет текста */
+  color: black;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: transparent;
 }
+
     </style>
 </head>
 <body>
@@ -1277,6 +1278,8 @@ updateOverlayFilter();
         iconClass = 'blue-id';  
     } else if (speed >= 300 && speed <= 301) {
         iconUrl = 'bplaper.png';
+    } else if (speed >= 205 && speed <= 250) {
+        iconUrl = 'vertolet.png';
     } else {
         // Если скорость не попала ни в одно условие, ставим "neyst tip.png"
         iconUrl = 'neyst tip.png';
