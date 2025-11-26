@@ -150,109 +150,102 @@ input[type="text"] {
             margin-right: 10px;
         }
     
-        .red-id {
+      .red-id {
             color: #000000;
         }
         .blue-id {
             color: #000000; /* Синий цвет для текста */
         }
-        
 
         /* Стили для текста в зависимости от цвета */
 .red-id .label-container,
 .red-id .r-container,
-.red-id .rls-container 
+.red-id .rls-container, 
 .red-id .icon-container {
     color: #000000;
 }
 
 .blue-id .label-container,
 .blue-id .r-container,
-.blue-id .rls-container 
+.blue-id .rls-container,
 .blue-id .icon-container {
-    color: #000000; /* Синий цвет для текста */
+        color: #000000; /* Синий цвет для текста */
 }
-        .shifted-id-x-101 {
-            margin-left: 20px;
-       }
-        .shifted-id {
-            margin-left: 15px;
-        }
-        .shifted-id-grumble {
-            margin-left: 25px;
-        }
-        .shifted-id-kinzhal {
-            margin-left: 25px;
-        }
-        .info-container {
-            line-height: 9px;
-        }
-        .iconname {
-            line-height: 5px;
-        }
-                .iconname {
-            line-height: 5px;
-        }
-                .info-container1 {
-            line-height: 7px;
-        }
-        .label-container {
-            font-size: 6.5px;
-            font-weight: 600;
-                    font-family: 'Roboto', sans-serif;
- 
-            -webkit-text-stroke-color: black;
-        }
-        .r-container {
-            font-size: 6.5px;
-            font-weight: 600;
-            font-family: 'Roboto', sans-serif;
-            opacity: 0;
- 
-        }
-        .rls1-container {
-            font-size: 6.5px;
-            font-family: 'Roboto', sans-serif;
- 
-            display: flex;
+      .shifted-id-x-101 {
+    margin-left: 32px; /* 20 * 1.6 */
+}
+.shifted-id {
+    margin-left: 24px; /* 15 * 1.6 */
+}
+.shifted-id-grumble,
+.shifted-id-kinzhal {
+    margin-left: 40px; /* 25 * 1.6 */
+}
+
+.info-container {
+    line-height: 14px; /* 9 * 1.6 */
+}
+.iconname {
+    line-height: 8px; /* 5 * 1.6 */
+}
+.info-container1 {
+    line-height: 11px; /* 7 * 1.6 */
+}
+.info-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.7px; /* 2 * 0.83 */
+
+    padding: 4px 33px 4px 33px; /* 5 → 4, 40 → 33 */
+    min-width: 62px;            /* 75 * 0.83 */
+    height: 9px;                /* 11 * 0.83 */
+    line-height: 0.8;
+
+    border-style: solid;
+    border-width: 0.8px;        /* 1 * 0.83 */
+    border-top-color: rgba(0,0,0,0.95);
+    border-left-color: rgba(0,0,0,0.95);
+    border-right-color: rgba(0,0,0,0.95);
+    border-bottom-color: rgba(0,0,0,0.95);
+    box-sizing: border-box;
+
+    contain: layout paint;
+    will-change: transform;
+}
+
+.info-container.expanded {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8px;          /* 1 * 0.83 */
+    padding: 2.5px 4px;  /* 3×5 → 2.5×4 */
+    height: auto !important;
+    min-width: auto;
+    line-height: 1;
+}
+
+/* ——— Текстовые контейнеры ——— */
+.label-container,
+.r-container,
+.rls1-container,
+.rls-container,
+.label1-container,
+.r1-container {
+    font-size: 8.6px;          /* 10.4 * 0.83 */
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    -webkit-text-stroke-color: black;
+}
+
+.rls1-container,
+.rls-container {
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    font-weight: 600;
-            color: #333333;
-   }    
-        .rls-container {
-            font-size: 6.5px;
-            display: flex;
-            font-family: 'Roboto', sans-serif;
-            font-weight: 600;
-    flex-direction: column;
-    justify-content: center;
-            color: #333333;
-   }
-        .label1-container {
-            font-size: 6.5px;
-            font-family: 'Roboto', sans-serif;
-            font-weight: 600;
-            -webkit-text-stroke-color: black;
-            color: #333333;
-        }
-        .r1-container {
-            font-size: 6.5px;
-            font-weight: 600;
-            font-family: 'Roboto', sans-serif;
-            color: #333333;
-        }
-/* Для iPhone (портретная ориентация, ширина ≤ 375px) */
-@media (max-width: 375px) {
-    .label-container,
-    .r-container,
-    .rls1-container,
-    .rls-container,
-    .label1-container,
-    .r1-container {
-        font-size: 9px;  /* увеличиваем с 6.5px до 9px */
-    }
 }
+
 
    /* Delete Button */
 #deleteButton {
@@ -314,20 +307,7 @@ input[type="text"] {
     display: block;
 }
 
-/* Оптимизация для iPhone 11 Pro (375px ширина) */
-@media (max-width: 375px) {
-    .icon-container,
-    .icon-container1 {
-        gap: 6px;        /* немного уменьшаем расстояние */
-        font-size: 6px;  /* уменьшаем текст для компактности */
-    }
 
-    .icon-container .icon,
-    .icon-container1 .icon {
-        width: 20x;     /* чуть меньшие иконки */
-        height: 20px;
-    }
-}
     /* Modal Input Background for Target Coordinates */
 #targetModal {
     padding: 13.3px;           /* 10px * 1.333 */
@@ -602,7 +582,7 @@ body {
     margin-bottom: 0;
     padding-top: 4px;         /* 3*1.333 */
 }
-  .dynamic-zoom {
+.dynamic-zoom {
       position: absolute;
       bottom: 20px;
       left: 50%;
@@ -724,7 +704,7 @@ body {
         <button class="modal-button" id="targetSubmit"><i class="fas fa-check"></i> Подтвердить</button>
         <button class="modal-button modal-close" id="targetClose"><i class="fas fa-times"></i> Закрыть</button>
     </div>
-          <div class="dynamic-zoom" id="zoom-buttons">
+              <div class="dynamic-zoom" id="zoom-buttons">
     <button id="zoom-out">-</button>
     <button id="zoom-in">+</button>
   </div>
@@ -785,14 +765,11 @@ body {
         }
     });
         const map = L.map('map', {
-            zoomControl: false,
-            zoomSnap: 0.33,
-    zoomDelta: 0.33,
+            zoomControl: false
         }).setView([48.3794, 31.1656], 6);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
-            
         }).addTo(map);
         
         
@@ -2233,7 +2210,6 @@ fetch('trevoga.json')
 
           }).addTo(map);
 
-
           polygons['Kyiv'] = kyivLayer;
           checkbox.checked = true;
           return; // не открываем список
@@ -2304,7 +2280,6 @@ document.getElementById('alert-button').onclick = function() {
   menuVisible = !menuVisible;
   document.getElementById('alert-menu').style.display = menuVisible ? 'block' : 'none';
 };
-
         function getKievTime() {
     const options = {
         timeZone: 'Europe/Kiev',
@@ -2351,8 +2326,6 @@ function getNextLitakId() {
     // Проверяем каждые 500 мс
     setInterval(updateAlertCount, 500);
     updateAlertCount();
-     // Загрузка GeoJSON файла
-    // Загружаем ОККУПИРОВАННЫЕ территории
     const zoomButtons = document.getElementById('zoom-buttons');
     let hideTimeout;
 
@@ -2369,6 +2342,7 @@ function getNextLitakId() {
 
     document.getElementById('zoom-in').onclick = () => map.zoomIn();
     document.getElementById('zoom-out').onclick = () => map.zoomOut();
+
     </script>
 </body>
 </html>
