@@ -729,7 +729,7 @@ body {
     <button id="zoom-in">+</button>
   </div>
     <div id="alert-container">
-<div id="alert-menu">
+  <div id="alert-menu">
     <h3>Дать тревогу</h3>
     <div><input type="checkbox" id="Сумська область"><label for="Сумська область">Сумская область</label></div>
     <div><input type="checkbox" id="г.Київ"><label for="г.Київ">г.Киев</label></div>
@@ -760,7 +760,6 @@ body {
     <div><input type="checkbox" id="По всей территории"><label for="По всей территории">По всей территории</label></div>
   </div>
 </div>
-
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-measure/3.1.0/leaflet-measure.js"></script>
     <script src="https://unpkg.com/leaflet-geosearch/dist/bundle.min.js"></script>
@@ -786,11 +785,14 @@ body {
         }
     });
         const map = L.map('map', {
-            zoomControl: false
+            zoomControl: false,
+            zoomSnap: 0.33,
+    zoomDelta: 0.33,
         }).setView([48.3794, 31.1656], 6);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
+            
         }).addTo(map);
         
         
@@ -1041,7 +1043,7 @@ updateOverlayFilter();
             }
         }
 
-        map.on('click', (e) => {
+ map.on('click', (e) => {
             if (deleteMode) return;
 
             const { lat, lng } = e.latlng;
@@ -1053,11 +1055,11 @@ updateOverlayFilter();
 
                       const objectId = generateId();
             let iconUrl;
-            let iconClass = 'red-id';
-            let shiftedClass = ''
-            let shiftedClasss = ''
+let iconClass = "red-id";
+let shiftedClass = "";
+let shiftedClasss = "";
 
-            if (speed === 0) {  
+            if (speed === 0) { 
                 
     // Если скорость 0, сразу устанавливаем иконку EPVO
     iconUrl = 'EPVO.png'; 
@@ -1083,41 +1085,34 @@ updateOverlayFilter();
         iconAnchor: [10, 8],
     });
 } else {
-    // Условия для выбора иконки в зависимости от скорости
-    if (speed >= 120 && speed <= 121) {
-        iconUrl = 'supercam.png';
-} else if (speed > 120 && speed <= 200) {
-    // Генерируем случайное число от 0 до 1
-    const random = Math.random(); // число от 0 до 1
 
-    if (random < 0.3) {
-        // 80% шанс
-        iconUrl = 'neyst tip.png';
-    } else {
-        // 20% шанс
-        iconUrl = 'shahed.png';
-    }
-    } else if (speed >= 7559 && speed < 7560) {
-        iconUrl = 'iskander.png';
-        shiftedClass = 'shifted-info-container';
-    } else if (speed >= 950 && speed <= 951) {
-        iconUrl = 'kalibr.png';
-        iconClass = 'kr';
-        shiftedClass = 'shifted-info-container';
+// Условия выбора иконки по скорости
+if (speed >= 120 && speed <= 121) {
+    iconUrl = 'supercam.png';
+
+} else if (speed > 120 && speed <= 200) {
+
+    // случай иконки — создаём случай 1 раз
+    const random = Math.random();
+    iconUrl = random < 0.3 ? 'neyst tip.png' : 'shahed.png';
+
+} else if (speed >= 7559 && speed < 7560) {
+    iconUrl = 'iskander.png';
+    shiftedClass = 'shifted-info-container';
+
+} else if (speed >= 950 && speed <= 951) {
+    iconUrl = 'kalibr.png';
+    iconClass = 'kr';
     } else if (speed >= 1000 && speed <= 1001) {
         iconUrl = 'x101.png';
         iconClass = 'kr';
-        shiftedClass = 'shifted-info-container';
     } else if (speed >= 450 && speed <= 459) {
         iconUrl = 'kab.png';
     } else if (speed >= 11024 && speed <= 11025) {
-        shiftedClass = 'shifted-info-container';
         iconUrl = 'Tsirkon.png';
     } else if (speed >= 14687 && speed <= 14688) {
-        shiftedClass = 'shifted-info-container';
         iconUrl = 'Kinzhal.png';
     } else if (speed >= 4899 && speed <= 4900) {
-        shiftedClass = 'shifted-info-container';
         iconUrl = 'Kh-22.png';
     } else if (speed >= 1049 && speed <= 1050) {
         shiftedClass = 'shifted-info-container';
@@ -1182,17 +1177,17 @@ updateOverlayFilter();
     } else if (speed >= 1002 && speed <= 1003) {
         iconUrl = 'f-16.png';
         iconClass = 'blue-id';
-    } else if (speed >= 1200 && speed <= 1201) {
+    } else if (speed >= 800 && speed <= 801) {
         iconUrl = 'Su-34.png';
         iconClass = 'red-id su34-icon';
-    } else if (speed >= 1600 && speed <= 1601) {
+    } else if (speed >= 815 && speed <= 816) {
         iconUrl = 'Su-57.png';
-    } else if (speed >= 1204 && speed <= 1205) {
+    } else if (speed >= 820 && speed <= 821) {
         iconUrl = 'Su-30.png';
     } else if (speed >= 1202 && speed <= 1203) {
         iconUrl = 'Su-30 BLR.png';
         iconClass = 'blue-id';  
-    } else if (speed >= 1400 && speed <= 1401) {
+    } else if (speed >= 840 && speed <= 840) {
         iconUrl = 'Su-35.png';
     } else if (speed >= 2300 && speed <= 2301) {
         iconUrl = 'Tu-22M3.png';
@@ -1213,7 +1208,7 @@ updateOverlayFilter();
         shiftedClass = 'shifted-info-container';
     } else if (speed >= 500 && speed <= 501) {
         iconUrl = 'shahed 238.png';
-    } else if (speed >= 2400 && speed <= 2450) {
+    } else if (speed >= 920 && speed <= 921) {
         iconUrl = 'mig-31.png';
     } else if (speed >= 800 && speed <= 801) {
         iconUrl = 'a-50.png';
@@ -1225,108 +1220,207 @@ updateOverlayFilter();
         iconClass = 'blue-id';  
     } else if (speed >= 300 && speed <= 301) {
         iconUrl = 'bplaper.png';
+            iconClass = 'perexop';  
     } else if (speed >= 205 && speed <= 250) {
         iconUrl = 'vertolet.png';
+        iconClass = 'vertolet';  
     } else {
         // Если скорость не попала ни в одно условие, ставим "neyst tip.png"
         iconUrl = 'neyst tip.png';
     }
-  if (iconUrl === 'litak.png') {
-  const objectId3 = getNextLitakId();
-  iconHtml = `
+      const objectId2 = getNextObjectIdBlue();
+    if (!window._markerIconMemory) window._markerIconMemory = {};
+    const key = `${lat}-${lng}-${speed}`;
+
+    if (!window._markerIconMemory[key]) {
+        window._markerIconMemory[key] = iconUrl;  // сохраняем один раз
+    }
+
+    iconUrl = window._markerIconMemory[key];       // используем сохранённый тип
+    // -----------------------------------------
+
+
+    
+    if (iconUrl === 'litak.png') {
+        const objectId3 = getNextLitakId();
+        iconHtml = `
     <div class="icon-container ${iconClass}">
-      <img src="${iconUrl}" class="icon" />
-    </div>
-  `;
-              icon = L.divIcon({
-        className: 'icon',
-        html: iconHtml,
-        iconSize: [24, 24], // общий размер
-        iconAnchor: [12, 12],
-    });
-} else if (iconClass === 'kr') {
-      iconUrl = 'kalibr.png';
-      iconClass = 'red-id';
-  iconHtml = `
+            <div class="icon-wrap">
+        <img src="${iconUrl}" class="icon" />
+                        <div class="info-container ${shiftedClass} ${shiftedClasss}" style="opacity:0;">    
+                    <span class="label-container ${iconClass}">${objectId3}</span>
+                    <span class="r-container ${iconClass}">ЛБ·</span>
+                </div>
+            </div>
+        `;
+                icon = L.divIcon({
+            className: 'icon',
+            html: iconHtml,
+            iconSize: [26, 26],
+            iconAnchor: [13, 13],
+        });
+    } else if (iconClass === 'kr') {
+        iconUrl = 'kalibr.png';
+        iconClass = 'red-id';
+        iconHtml = `
     <div class="icon-container ${iconClass}">
-      <img src="${iconUrl}" class="icon" />
-                          <span class="r-container ${iconClass}">ПП</span>
-    </div>
-  `;
-      icon = L.divIcon({
-        className: 'icon',
-        html: iconHtml,
-        iconSize: [3, 3],      // 👈 спец. размер для KR
-        iconAnchor: [3, 9], // 👈 спец. якорь для KR
-    });
-} else if (iconClass === 'zl') {
-  const objectId2 = getNextObjectIdBlue();
-    iconUrl = 'zl.png';
-    iconHtml = `
-        <div class="icon-container ${iconClass}">
-            <img src="${iconUrl}" class="icon" />
-                                <span class="r-container ${iconClass}">ЗЛ</span>
-        </div>
-    `;
-              icon = L.divIcon({
-        className: 'icon',
-        html: iconHtml,
-        iconSize: [24, 24], // общий размер
-        iconAnchor: [12, 12],
-    });
-} else if (iconClass === 'blue-id') {
-  const objectId2 = getNextObjectIdBlue();
-    iconUrl = 'blue.png';
-  iconHtml = `
-    <div class="icon-container ${iconClass}">
-      <img src="${iconUrl}" class="icon" />
-                    <span class="r-container ${iconClass}">СВ</span>
-    </div>
-  `;
-          icon = L.divIcon({
-        className: 'icon',
-        html: iconHtml,
-        iconSize: [24, 24], // общий размер
-        iconAnchor: [12, 12],
-    });
-} else {
-    const iconTypes = {
-    "shahed 238.png": "Ударний дрон",
-    "shahed.png": "Ударний дрон",
-    "кр.png": "Крилата ракета"
-};
-
-// В блоке else (для обычных иконок)
-const iconName = iconTypes[iconUrl] || "Невідомий об'єкт";
-
-// Генерация случайного числа от 1 до 200
-const randomNumber = Math.floor(Math.random() * 200) + 1;
-
-
-    // Основной шаблон для всех остальных случаев
-    iconHtml = `
-        <div class="icon-container ${iconClass}">
-            <img src="${iconUrl}" class="icon" />
-                                <span class="r-container ${iconClass}">ПП</span>
-        </div>
-    `;
+            <div class="icon-wrap">
+        <img src="${iconUrl}" class="icon" />
+          <div class="info-container ${shiftedClass} ${shiftedClasss}" style="opacity:0;">
+                    <span class="label-container ${iconClass}">${objectId}р</span>
+                    <span class="r-container ${iconClass}">ПП·</span>
+                </div>
+            </div>
+        `;
         icon = L.divIcon({
-        className: 'icon',
-        html: iconHtml,
-        iconSize: [24, 24], // общий размер
-        iconAnchor: [12, 12],
-    });
+            className: 'icon',
+            html: iconHtml,
+            iconSize: [26, 26],
+            iconAnchor: [13, 13],
+        });
+    } else if (iconClass === 'zl') {
+        const objectId2 = getNextObjectIdBlue();
+        iconUrl = 'zl.png';
+        iconHtml = `
+    <div class="icon-container ${iconClass}">
+            <div class="icon-wrap">
+        <img src="${iconUrl}" class="icon" />
+        <div class="info-container ${shiftedClass} ${shiftedClasss}" style="opacity:0;">
+                    <span class="label-container ${iconClass}">0${objectId2}р</span>
+                    <span class="r-container ${iconClass}">ЗЛ·</span>
+                </div>
+            </div>
+        `;
+        icon = L.divIcon({
+            className: 'icon',
+            html: iconHtml,
+            iconSize: [26, 26],
+            iconAnchor: [13, 13],
+        });
+    } else if (iconClass === 'blue-id') {
+        iconUrl = 'blue.png';
+        iconHtml = `
+    <div class="icon-container ${iconClass}">
+            <div class="icon-wrap">
+        <img src="${iconUrl}" class="icon" />
+        <div class="info-container ${shiftedClass} ${shiftedClasss}" style="opacity:0;">
+                    <span class="label-container ${iconClass}">0${objectId2}р</span>
+                    <span class="r-container ${iconClass}">СВ·</span>
+                </div>
+            </div>
+        `;
+        icon = L.divIcon({
+            className: 'icon',
+            html: iconHtml,
+            iconSize: [26, 26],
+            iconAnchor: [13, 13],
+        });
+    } else if (iconClass === 'vertolet') {
+        iconClass = 'blue-id';
+        iconHtml = `
+    <div class="icon-container ${iconClass}">
+            <div class="icon-wrap">
+        <img src="${iconUrl}" class="icon" />
+        <div class="info-container ${shiftedClass} ${shiftedClasss}" style="opacity:0;">
+                    <span class="label-container ${iconClass}">0${objectId2}р</span>
+                    <span class="r-container ${iconClass}">СВ·</span>
+                </div>
+            </div>
+        `;
+        icon = L.divIcon({
+            className: 'icon',
+            html: iconHtml,
+            iconSize: [26, 26],
+            iconAnchor: [13, 13],
+        });
+    } else if (iconClass === 'perexop') {
+        iconHtml = `
+    <div class="icon-container ${iconClass}">
+            <div class="icon-wrap">
+        <img src="${iconUrl}" class="icon" />
+        <div class="info-container ${shiftedClass} ${shiftedClasss}" style="opacity:0;">
+                    <span class="label-container ${iconClass}">0${objectId2}р</span>
+                    <span class="r-container ${iconClass}">ЗЛ·</span>
+                </div>
+            </div>
+        `;
+        icon = L.divIcon({
+            className: 'icon',
+            html: iconHtml,
+            iconSize: [28.8, 28.8],
+            iconAnchor: [14.4, 14.4],
+        });
+    } else {
+        const iconTypes = {
+            "shahed 238.png": "Ударний дрон",
+            "shahed.png": "Ударний дрон",
+            "кр.png": "Крилата ракета"
+        };
+
+        const iconName = iconTypes[iconUrl] || "Невідомий об'єкт";
+        const randomNumber = Math.floor(Math.random() * 200) + 1;
+iconHtml = `
+    <div class="icon-container ${iconClass}">
+            <div class="icon-wrap">
+        <img src="${iconUrl}" class="icon" />
+        <div class="info-container ${shiftedClass} ${shiftedClasss}" style="opacity:0;">
+            <span class="label-container ${iconClass}">${objectId}р</span>
+            <span class="r-container ${iconClass}">ПП·</span>
+        </div>
+    </div>
+`;
+
+        icon = L.divIcon({
+            className: 'icon',
+            html: iconHtml,
+            iconSize: [26, 26],
+            iconAnchor: [13, 13],
+        });
+    }
 }
-}
+
 let iconCreated = false;
+function addSpeedCircle(marker, speed) {
+    let color = null;
+
+    if (speed > 4000) {
+        color = "#ff6a00";
+    } else if (speed >= 2000) {
+        color = "#ffea70";
+    } else {
+        return null;
+    }
+
+    const latlng = marker.getLatLng();
+    const circle = L.circleMarker(latlng, {
+        radius: 14.94,
+        stroke: false,
+        fillColor: color,
+        fillOpacity: 0.65,
+    }).addTo(map);
+
+    marker.on("move", () => {
+        circle.setLatLng(marker.getLatLng());
+    });
+
+    return circle;
+}
 
 const marker = L.marker([lat, lng], { icon }).addTo(map);
+
+// если у маркера уже был круг — удаляем
+if (marker._speedCircle) {
+    map.removeLayer(marker._speedCircle);
+}
+
+marker._speedCircle = addSpeedCircle(marker, speed);
+
 
 setInterval(() => {
     const el = document.getElementById('warning-message');
     
     // бросаем "монетку": 0 или 1
-    const show = Math.random() < 0.35;
+    const show = Math.random() < 0.5;
 
     if (show) {
         el.classList.remove('hidden'); // показать
@@ -1334,7 +1428,6 @@ setInterval(() => {
         el.classList.add('hidden');    // спрятать
     }
 }, 10 * 60 * 1000); // каждые 10 минут
-
 const translations = {
     "supercam": "Supercam",
     "shahed": "Shahed",
@@ -1377,6 +1470,7 @@ const translations = {
 let objectKey = iconUrl.replace('.png', '').replace(/-/g, ' ');
 let objectType = translations[objectKey] || objectKey;
 objectType = objectType.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+
 
 let currentLat = lat;
 let currentLng = lng;
@@ -1518,7 +1612,7 @@ icons.innerHTML = `
     <button id="changeCoordsBtn-${objectId}" title="Изменить маршрут" style="
         width:22px;height:22px;
         border:1px solid rgba(255,255,255,0.25);
-        background:rgb(101, 101, 101);;
+        background: rgb(101, 101, 101);
         border-radius:2px;
         cursor:pointer;
         display:flex;
@@ -1532,7 +1626,7 @@ icons.innerHTML = `
     <button id="zelenySamBtn-${objectId}" title="Самолёт" style="
         width:22px;height:22px;
         border:1px solid rgba(255,255,255,0.25);
-        background:rgb(101, 101, 101);;
+        background: rgb(101, 101, 101);
         border-radius:2px;
         cursor:default;
         display:flex;
@@ -1546,7 +1640,7 @@ icons.innerHTML = `
     <button id="closeTopMenu-${objectId}" title="Закрыть" style="
         width:22px;height:22px;
         border:1px solid rgba(255,255,255,0.25);
-        background:rgb(101, 101, 101);
+        background: rgb(101, 101, 101);
         border-radius:2px;
         cursor:pointer;
         display:flex;
@@ -1560,14 +1654,23 @@ icons.innerHTML = `
     </button>
 `;
 
-
-
     menu.appendChild(row);
     menu.appendChild(icons);
     document.body.appendChild(menu);
 
     // обновлено — линия теперь исчезает при закрытии меню
     document.getElementById(`closeTopMenu-${objectId}`).onclick = () => {
+        // вернуть иконку в обычный вид, если была раскрыта
+if (marker._expanded) {
+    marker.setIcon(L.divIcon({
+        className: "icon",
+        html: marker._originalIconHtml,
+        iconSize: marker._originalSize,
+        iconAnchor: marker._originalAnchor
+    }));
+    marker._expanded = false;
+}
+
         menu.remove();
     // если есть линия направления — удалить
     if (headingLine) {
@@ -1592,6 +1695,7 @@ icons.innerHTML = `
         m.style.top = 15 + i * 30 + 'px';
     });
 };
+
 
     document.getElementById(`changeCoordsBtn-${objectId}`).onclick = () => {
         openCoordsModal((coordsText) => {
@@ -1621,8 +1725,124 @@ icons.innerHTML = `
 // ==== Клик по маркеру ====
 // Добавляем функционал линии направления
 let headingLine = null;
+
 marker.on('click', () => {
     createTopMenu(marker);
+
+    // сохранить исходные параметры 1 раз
+if (!marker._saved) {
+
+    // HTML который реально стоит у маркера
+    const iconHtmlThis = marker.options.icon.options.html;
+
+    // Сохраняем оригинальный HTML
+    marker._originalIconHtml = iconHtmlThis;
+
+    // Сохраняем размер и якорь
+    marker._originalAnchor = marker.options.icon.options.iconAnchor;
+    marker._originalSize   = marker.options.icon.options.iconSize;
+
+    // Разбор HTML
+    const temp = document.createElement("div");
+    temp.innerHTML = iconHtmlThis;
+
+    const idEl = temp.querySelector(".label-container");
+    const rEl  = temp.querySelector(".r-container");
+
+    marker._originalID = idEl ? idEl.textContent.trim() : "";
+    marker._originalR  = rEl  ? rEl.textContent.trim() : "";
+marker._originalRLS = getRlsForObject(objectId, iconUrl);
+
+    marker._saved = true; // чтобы не сохранять снова
+}
+
+const ICON_TYPES = {
+    "shahed.png": "Ударний дрон",
+    "kalibr.png": "Крилата ракета",
+    "Su-35.png": "Су-35",
+    "Su-34.png": "Су-34",
+    "Su-30.png": "Су-30",
+    "Su-57.png": "Су-57",
+    "orlan.png": "Розвід. дрон",
+    "bplaper.png": "БпЛА перехоп.",
+    "vertolet.png": "Вертоліт",
+    "mig-31.png": "МіГ-31",
+ 
+};
+const objectType = ICON_TYPES[iconUrl] || "";
+
+    // ==== Разворачиваем ====
+    if (!marker._expanded) {
+
+        const angle = marker._lastAngle || 0;
+
+       const expandedHtml = `
+<div class="icon-container ${iconClass} ${marker._expanded ? "expanded" : ""} ${objectType ? "with-type" : ""}">
+
+    <!-- БЛОК ИКОНКИ — ТОЛЬКО КАРТИНКА -->
+    <div class="icon-wrap">
+        <img src="${iconUrl}" class="icon" />
+    </div>
+
+    <!-- ТЕКСТ — ОТДЕЛЬНО -->
+    <div class="info-container"
+         style="
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            justify-content: flex-start !important;
+
+            padding: 0.8px 4px 0.8px 8px !important;
+            min-width: auto !important;
+    height: auto !important;
+    gap: 0.8px !important;                    /* 1 * 0.83 */
+    line-height: 1.2 !important;
+    contain: none !important;
+             ">
+<span class="r-container ${iconClass}">${objectType}</span>
+            <div style="display:flex; gap:2px;">
+                <span class="label-container ${iconClass}">${marker._originalID}</span>
+                <span class="r-container ${iconClass}">${marker._originalR}</span>
+            </div>
+
+            <span class="r-container ${iconClass}">${speed}</span>
+
+            <span class="r-container ${iconClass}">${Math.round(angle)}°</span>
+
+
+        </div>
+    </div>
+`;
+
+
+const expandedAnchor = [
+    marker._originalAnchor[0],
+    marker._originalAnchor[1] + (objectType ? 11 : 6)
+];
+
+
+        marker.setIcon(L.divIcon({
+            className: "icon",
+            html: expandedHtml,
+            iconSize: marker._originalSize,
+            iconAnchor: expandedAnchor
+        }));
+
+        marker._expanded = true;
+    }
+
+    // ==== Сворачиваем обратно ====
+    else {
+
+        marker.setIcon(L.divIcon({
+            className: "icon",
+            html: marker._originalIconHtml,
+            iconSize: marker._originalSize,
+            iconAnchor: marker._originalAnchor
+        }));
+
+        marker._expanded = false;
+    }
 
     if (headingLine) {
         map.removeLayer(headingLine);
@@ -1661,7 +1881,10 @@ function rotateIcon(lat1, lng1, lat2, lng2, speed) {
     const angle = (course + 360) % 360;
     marker._icon.querySelector('.icon').style.transform = `rotate(${angle}deg)`;
     updateHeadingLine(angle);
-}
+
+    // 🔥 ОБЯЗАТЕЛЬНО — чтобы курс обновлялся в expandedHtml
+    marker._lastAngle = angle;
+}   
 
 markers.push(marker);
 
@@ -1681,20 +1904,31 @@ function updatePosition(timestamp) {
     const distance = haversine(currentLat, currentLng, targetLatVar, targetLngVar);
     const stepDistance = haversine(currentLat, currentLng, newLat, newLng);
 
-    if (stepDistance >= distance || distance <= 0.00001) {
-        currentLat = targetLatVar;
-        currentLng = targetLngVar;
-        currentWaypointIndex++;
-        if (currentWaypointIndex < waypoints.length) {
-            targetLatVar = waypoints[currentWaypointIndex][0];
-            targetLngVar = waypoints[currentWaypointIndex][1];
-            scheduleNextFrame(updatePosition);
-        } else {
-            isActive = false;
-            marker.remove();
-            if (headingLine) map.removeLayer(headingLine);
-        }
+if (stepDistance >= distance || distance <= 0.00001) {
+    currentLat = targetLatVar;
+    currentLng = targetLngVar;
+    currentWaypointIndex++;
+
+    if (currentWaypointIndex < waypoints.length) {
+        targetLatVar = waypoints[currentWaypointIndex][0];
+        targetLngVar = waypoints[currentWaypointIndex][1];
+        scheduleNextFrame(updatePosition);
     } else {
+        isActive = false;
+
+        // Удаляем круг
+        if (marker._speedCircle) {
+            map.removeLayer(marker._speedCircle);
+        }
+
+        // Удаляем маркер
+        marker.remove();
+
+        if (headingLine)
+            map.removeLayer(headingLine);
+    }
+}
+ else {
         currentLat = newLat;
         currentLng = newLng;
         rotateIcon(currentLat, currentLng, targetLatVar, targetLngVar, speed);
@@ -1921,7 +2155,6 @@ fetch("front.json")
   })
   .catch(error => console.error("Ошибка загрузки JSON:", error));
 
-
   let polygons = {}; // активные районы
 let activeDistricts = {}; // какие районы включены
 let menuVisible = false;
@@ -1999,6 +2232,7 @@ fetch('trevoga.json')
 }
 
           }).addTo(map);
+
 
           polygons['Kyiv'] = kyivLayer;
           checkbox.checked = true;
